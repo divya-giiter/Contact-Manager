@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Consumer } from "../../context";
-import { getValue } from "@testing-library/user-event/dist/utils";
 
 class Contact extends Component {
   state = {
@@ -22,7 +21,7 @@ class Contact extends Component {
           return (
             <div className="card card-body mb-3 container ">
               <h4>
-                {name}
+                {name}&nbsp;
                 <i
                   onClick={() =>
                     this.setState({
