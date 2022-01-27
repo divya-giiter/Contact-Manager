@@ -15,15 +15,15 @@ class AddContact extends Component {
     const { name, email, phone } = this.state;
 
     //Check for Errors
-    if (name === " ") {
+    if (name === "") {
       this.setState({ errors: { name: "Name is required" } });
       return;
     }
-    if (email === " ") {
+    if (email === "") {
       this.setState({ errors: { email: "Email is required" } });
       return;
     }
-    if (phone === " ") {
+    if (phone === "") {
       this.setState({ errors: { phone: "Phone is required" } });
       return;
     }
@@ -43,6 +43,10 @@ class AddContact extends Component {
       phone: "",
       errors: {},
     });
+
+    const { history } = this.props;
+    history.push("/");
+    // this.props.history.push("/");
   };
 
   onChange = (e) => this.setState({ [e.target.name]: e.target.value });
