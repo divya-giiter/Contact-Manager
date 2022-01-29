@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Consumer } from "../../context";
 import TextInputGroup from "../layout/TextInputGroup";
-import { v1 as uuid } from "uuid";
+// import { v1 as uuid } from "uuid";
+import axios from "axios";
+// import { useHistory } from "react-router-dom";
 class AddContact extends Component {
   state = {
     name: "",
@@ -12,8 +14,9 @@ class AddContact extends Component {
 
   onSubmit = (dispatch, e) => {
     e.preventDefault();
-    const { name, email, phone } = this.state;
 
+    const { name, email, phone } = this.state;
+    console.log(name, email, phone);
     //Check for Errors
     if (name === "") {
       this.setState({ errors: { name: "Name is required" } });
@@ -29,13 +32,14 @@ class AddContact extends Component {
     }
 
     const newContact = {
-      id: uuid(),
       name,
       email,
       phone,
     };
 
-    dispatch({ type: "ADD_CONTACT", payload: newContact });
+    axios
+      .post("https://jsonplaceholder.typicode.com/users", newContact)
+      .then((res) => dispatch({ type: "ADD_CONTACT", payload: res.data }));
 
     this.setState({
       name: "",
@@ -44,8 +48,12 @@ class AddContact extends Component {
       errors: {},
     });
 
-    const { history } = this.props;
-    history.push("/");
+    // let history = useHistory();
+    // history.push("/");
+
+    // const { history } = this.props;
+    // history.push("/");
+
     // this.props.history.push("/");
   };
 
@@ -53,7 +61,6 @@ class AddContact extends Component {
 
   render() {
     const { name, email, phone, errors } = this.state;
-
     return (
       <Consumer>
         {(value) => {

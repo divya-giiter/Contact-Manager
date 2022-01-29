@@ -4,7 +4,9 @@ import Contacts from "./components/contacts/Contacts";
 import Header from "./components/layout/Header";
 import About from "./components/pages/About";
 import AddContact from "./components/contacts/AddContact";
-// import NotFound from "./components/pages/NotFound";
+import NotFound from "./components/pages/NotFound";
+import Test from "./components//test/Test";
+
 import { Provider } from "./context";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -22,7 +24,8 @@ class App extends Component {
                 <Route exact path="/" element={<Contacts />} />
                 <Route exact path="/contact/add" element={<AddContact />} />
                 <Route exact path="/about" element={<About />} />
-                {/* <Route element={<NotFound />} /> */}
+                <Route exact path="/test" element={<Test />} />
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </div>
           </div>
